@@ -40,7 +40,7 @@
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-book-half me-1"></i>
                             Sedang Di Baca
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill" id="v_jumlahBukuDibaca">0</span>
                         </button>
                     </form>
                 </div>
@@ -62,7 +62,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Filter Judul Buku</label>
-                            <input type="email" class="form-control" id="filterJudul" onkeyup="listBuku()" placeholder="Filter Judul Buku">
+                            <input type="text" class="form-control" id="filterJudul" onkeyup="listBuku()" placeholder="Filter Judul Buku">
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -115,15 +115,60 @@
                                 <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Form Tambah Buku</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                    ...
+                                        <div class="form-group mb-2">
+                                            <label for="exampleFormControlInput1">Judul Buku</label>
+                                            <input type="text" class="form-control" id="form_JudulBuku" placeholder="Judul Buku">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="exampleFormControlInput1">Pengarang Buku</label>
+                                            <input type="text" class="form-control" id="form_pengarangBuku" placeholder="Pengarang Buku">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="exampleFormControlSelect1">Tahun Buku</label>
+                                            <select class="form-control" id="form_tahunBuku">
+                                              <option value="-">- Tahun Buku -</option>
+                                              <option value="2022">Tahun 2022</option>
+                                              <option value="2021">Tahun 2021</option>
+                                              <option value="2020">Tahun 2020</option>
+                                              <option value="2019">Tahun 2019</option>
+                                              <option value="2018">Tahun 2018</option>
+                                              <option value="2017">Tahun 2017</option>
+                                              <option value="2016">Tahun 2016</option>
+                                              <option value="2015">Tahun 2015</option>
+                                              <option value="2014">Tahun 2014</option>
+                                              <option value="2013">Tahun 2013</option>
+                                              <option value="2012">Tahun 2012</option>
+                                              <option value="2011">Tahun 2011</option>
+                                              <option value="2010">Tahun 2010</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group mb-2">
+                                            <label for="exampleFormControlSelect1">Kategori Buku</label>
+                                            <select class="form-control" id="form_kategoriBuku">
+                                              <option value="-">- Kategori -</option>
+                                              <option value="frontend-dev">Front-End</option>
+                                              <option value="backend-dev">Backend</option>
+                                              <option value="android-dev">Android</option>
+                                              <option value="ios-dev">IOS</option>
+                                              <option value="multiapp-dev">Multi Platform</option>
+                                              <option value="cloud-dev">Goole Cloud</option>
+                                              <option value="azure-dev">Azure Cloud</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group mb-2">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Deskripsi Buku</label>
+                                            <textarea class="form-control" id="form_deskripsiBuku" rows="4"></textarea>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="resetTamabahData()">Close</button>
+                                    <button type="button" class="btn btn-primary" onclick="submitTambahData()">Tambah Data</button>
                                     </div>
                                 </div>
                                 </div>
@@ -153,43 +198,9 @@
                             <div class="col-12">
                                 <h4>List Buku Sedang Dibaca</h4>
                             </div>
-                            <div class="col-md-6">
-                                <div class="card h-100">
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="assets/frontend-dev.png" alt="logo-buku" />
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">Fancy Product</h5>
-                                            <!-- Product price-->
-                                            $40.00 - $80.00
-                                        </div>
-                                    </div>
-                                    <!-- Product actions-->
-                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card h-100">
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="assets/frontend-dev.png" alt="logo-buku" />
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">Fancy Product</h5>
-                                            <!-- Product price-->
-                                            $40.00 - $80.00
-                                        </div>
-                                    </div>
-                                    <!-- Product actions-->
-                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                                    </div>
-                                </div>
+
+                            <div class="row" id="dataListBukuSedangDibaca">
+
                             </div>
                         </div>                        
                     </div>
@@ -202,43 +213,8 @@
                             <div class="col-12">
                                 <h4>List Buku Selesai Dibaca</h4>
                             </div>
-                            <div class="col-md-6">
-                                <div class="card h-100">
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="assets/frontend-dev.png" alt="logo-buku" />
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">Fancy Product</h5>
-                                            <!-- Product price-->
-                                            $40.00 - $80.00
-                                        </div>
-                                    </div>
-                                    <!-- Product actions-->
-                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card h-100">
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="assets/frontend-dev.png" alt="logo-buku" />
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">Fancy Product</h5>
-                                            <!-- Product price-->
-                                            $40.00 - $80.00
-                                        </div>
-                                    </div>
-                                    <!-- Product actions-->
-                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                                    </div>
-                                </div>
+                            <div class="row" id="dataListBukuSelesaiDibaca">
+
                             </div>
                         </div>                        
                     </div> 
@@ -251,7 +227,7 @@
         </section>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Submission Bookshelf Apps Dicoding 2022</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

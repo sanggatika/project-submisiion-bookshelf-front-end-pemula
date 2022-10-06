@@ -23,7 +23,7 @@ databuku = [
         'tahun_buku':'2021',
         'kategori_buku':'ios-dev',
         'deskripsi_buku':'Kurikulum disusun oleh Dicoding dan pelaku industri di bidang iOS Development. Siswa dipersiapkan untuk menjadi iOS Developer sesuai standar kebutuhan industri.',
-        'status_buku':'0'
+        'status_buku':'1'
     },
     {
         'judul_buku':'Multi-Platform App Developer',
