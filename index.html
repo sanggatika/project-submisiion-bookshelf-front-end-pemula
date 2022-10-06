@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Bookshelf Apps Dicoding</title>
+
+        <!-- Meta Tag -->
+        <meta name="keywords" content="Bookshelf, Apps, Dicoding, Bookshelf Apps Dicoding" />
+        <meta name="description" content="Belajar Membuat Front-End Web untuk Pemula - Submission Aplikasi Pengelolaan Data Menggunakan DOM dan Web Storage">
+        <meta name="author" content="Giri Sanggatika">
+        <meta property="og:site_name" content="Bookshelf Apps Dicoding" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Bookshelf Apps Dicoding" />
+        <meta property="og:description" content="Belajar Membuat Front-End Web untuk Pemula - Submission Aplikasi Pengelolaan Data Menggunakan DOM dan Web Storage" />
+        <meta property="og:image" content="assets/new-ui-logo.png">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="assets/new-ui-logo.png" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="assets/new-ui-logo.png">
+        
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#!">Bookshelf Apps</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        
+                    </ul>
+                    <form class="d-flex">
+                        <button class="btn btn-outline-dark" type="submit">
+                            <i class="bi-book-half me-1"></i>
+                            Sedang Di Baca
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Bookshelf Apps Dicoding</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Belajar Membuat Front-End Web untuk Pemula - Submission Aplikasi Pengelolaan Data Menggunakan DOM dan Web Storage</p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5">
+                <div class="row mb-2">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Filter Judul Buku</label>
+                            <input type="email" class="form-control" id="filterJudul" onkeyup="listBuku()" placeholder="Filter Judul Buku">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Filter Tahun Buku</label>
+                            <select class="form-control" id="filterTahun" onchange="listBuku()">
+                              <option value="-">- Tahun Buku -</option>
+                              <option value="2022">Tahun 2022</option>
+                              <option value="2021">Tahun 2021</option>
+                              <option value="2020">Tahun 2020</option>
+                              <option value="2019">Tahun 2019</option>
+                              <option value="2018">Tahun 2018</option>
+                              <option value="2017">Tahun 2017</option>
+                              <option value="2016">Tahun 2016</option>
+                              <option value="2015">Tahun 2015</option>
+                              <option value="2014">Tahun 2014</option>
+                              <option value="2013">Tahun 2013</option>
+                              <option value="2012">Tahun 2012</option>
+                              <option value="2011">Tahun 2011</option>
+                              <option value="2010">Tahun 2010</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Filter Kategori Buku</label>
+                            <select class="form-control" id="filterKategori" onchange="listBuku()">
+                              <option value="-">- Kategori -</option>
+                              <option value="frontend-dev">Front-End</option>
+                              <option value="backend-dev">Backend</option>
+                              <option value="android-dev">Android</option>
+                              <option value="ios-dev">IOS</option>
+                              <option value="multiapp-dev">Multi Platform</option>
+                              <option value="cloud-dev">Goole Cloud</option>
+                              <option value="azure-dev">Azure Cloud</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group float-end">
+                            <br>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Tambah Data Buku
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    ...
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h4>Data List Buku</h4>
+                    </div>
+                </div>
+
+                <div class="row" id="dataListBuku">                    
+                                                    
+                </div>
+                
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+                            <div class="col-12">
+                                <h4>List Buku Sedang Dibaca</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <!-- Product image-->
+                                    <img class="card-img-top" src="assets/frontend-dev.png" alt="logo-buku" />
+                                    <!-- Product details-->
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <!-- Product name-->
+                                            <h5 class="fw-bolder">Fancy Product</h5>
+                                            <!-- Product price-->
+                                            $40.00 - $80.00
+                                        </div>
+                                    </div>
+                                    <!-- Product actions-->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <!-- Product image-->
+                                    <img class="card-img-top" src="assets/frontend-dev.png" alt="logo-buku" />
+                                    <!-- Product details-->
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <!-- Product name-->
+                                            <h5 class="fw-bolder">Fancy Product</h5>
+                                            <!-- Product price-->
+                                            $40.00 - $80.00
+                                        </div>
+                                    </div>
+                                    <!-- Product actions-->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                    
+                    <div class="col-12 col-md-6 mb-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+                            <div class="col-12">
+                                <h4>List Buku Selesai Dibaca</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <!-- Product image-->
+                                    <img class="card-img-top" src="assets/frontend-dev.png" alt="logo-buku" />
+                                    <!-- Product details-->
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <!-- Product name-->
+                                            <h5 class="fw-bolder">Fancy Product</h5>
+                                            <!-- Product price-->
+                                            $40.00 - $80.00
+                                        </div>
+                                    </div>
+                                    <!-- Product actions-->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <!-- Product image-->
+                                    <img class="card-img-top" src="assets/frontend-dev.png" alt="logo-buku" />
+                                    <!-- Product details-->
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <!-- Product name-->
+                                            <h5 class="fw-bolder">Fancy Product</h5>
+                                            <!-- Product price-->
+                                            $40.00 - $80.00
+                                        </div>
+                                    </div>
+                                    <!-- Product actions-->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div> 
+
+                    <div class="col-md-12">
+                        <hr>
+                    </div>                                       
+                </div>
+            </div>            
+        </section>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/listdata_buku.js"></script>
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
