@@ -50,7 +50,7 @@ function listBuku()
         {
             var tmpAssetIMG = assetImageBuku(dataFilterBuku[i].kategori_buku);
 
-            div.innerHTML = '<div class="col-6 col-md-3 mb-2"><div class="card h-100"><!-- Product image--><img class="card-img-top" src="'+tmpAssetIMG+'" alt="logo-buku" /><!-- Product details--><div class="card-body p-4"><div class="text-center"><!-- Product name--><h5 class="fw-bolder">'+dataFilterBuku[i].judul_buku+'</h5><!-- Product price-->'+dataFilterBuku[i].kategori_buku+' - '+dataFilterBuku[i].tahun_buku+'</div></div><!-- Product actions--><div class="card-footer p-4 pt-0 border-top-0 bg-transparent"><div class="text-center"><button type="button" class="btn btn-outline-primary">Detail</button> <button type="button" class="btn btn-outline-secondary" onclick="changeStatusBuku(\'' + dataFilterBuku[i].judul_buku + '\',\'' + '1' + '\')">Baca Buku</button></div></div></div></div>';
+            div.innerHTML = '<div class="col-6 col-md-3 mb-2"><div class="card h-100"><!-- Product image--><img class="card-img-top" src="'+tmpAssetIMG+'" alt="logo-buku" /><!-- Product details--><div class="card-body p-4"><div class="text-center"><!-- Product name--><h5 class="fw-bolder">'+dataFilterBuku[i].judul_buku+'</h5><!-- Product price-->'+dataFilterBuku[i].kategori_buku+' - '+dataFilterBuku[i].tahun_buku+'</div></div><!-- Product actions--><div class="card-footer p-4 pt-0 border-top-0 bg-transparent"><div class="text-center"><button type="button" class="btn btn-outline-primary">Detail</button> <button type="button" class="btn btn-outline-secondary" onclick="changeStatusBuku(\'' + dataFilterBuku[i].judul_buku + '\',\'' + '1' + '\')">Baca Buku</button> <button type="button" class="btn btn-outline-danger" onclick="removeListBuku(\'' + dataFilterBuku[i].judul_buku + '\')"><i class="bi-x-octagon-fill"></i></button></div></div></div></div>';
 
             document.getElementById('dataListBuku').appendChild(div.children[0]);
         }        
@@ -108,6 +108,11 @@ function changeStatusBuku (judul_buku, status) {
          break; //Stop this loop, we found it!
       }
     }
+    loadDataHTML();
+}
+
+function removeListBuku (judul_buku) {
+    databuku.splice(databuku.findIndex(item => item.judul_buku == judul_buku), 1);
     loadDataHTML();
 }
 
