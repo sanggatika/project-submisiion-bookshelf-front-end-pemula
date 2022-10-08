@@ -23,7 +23,7 @@ databuku = [
         'tahun_buku':'2021',
         'kategori_buku':'ios-dev',
         'deskripsi_buku':'Kurikulum disusun oleh Dicoding dan pelaku industri di bidang iOS Development. Siswa dipersiapkan untuk menjadi iOS Developer sesuai standar kebutuhan industri.',
-        'status_buku':'1'
+        'status_buku':'0'
     },
     {
         'judul_buku':'Multi-Platform App Developer',
@@ -34,3 +34,11 @@ databuku = [
         'status_buku':'0'
     },
 ]
+
+// set awal data ke local storage
+let storageKey = 'localStorageDataBuku';
+if(localStorage.getItem('localStorageDataBuku') == null)
+{
+    localStorage.setItem(storageKey, JSON.stringify(databuku));
+}
+

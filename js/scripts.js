@@ -1,10 +1,17 @@
-/*!
-* Start Bootstrap - Shop Homepage v5.0.5 (https://startbootstrap.com/template/shop-homepage)
-* Copyright 2013-2022 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-homepage/blob/master/LICENSE)
-*/
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
+
+// get data dari local storage
+var storageDataBuku = JSON.parse(localStorage.getItem(storageKey));
+// console.log(storageDataBuku);
+function updateLocalStorage() {
+    localStorage.setItem(storageKey, JSON.stringify(storageDataBuku));
+}
+
+function resetLocalStorage() {
+    localStorage.removeItem(storageKey);
+    location.reload();
+}
 
 function loadDataHTML()
 {
@@ -19,7 +26,7 @@ function listBuku()
     var filterTahun = document.getElementById('filterTahun').value;
     var filterJudul = document.getElementById('filterJudul').value;
 
-    var dataFilterBuku = databuku;
+    var dataFilterBuku = storageDataBuku;
 
     if(filterKategori != '-')
     {
@@ -50,7 +57,7 @@ function listBuku()
         {
             var tmpAssetIMG = assetImageBuku(dataFilterBuku[i].kategori_buku);
 
-            div.innerHTML = '<div class="col-6 col-md-3 mb-2"><div class="card h-100"><!-- Product image--><img class="card-img-top" src="'+tmpAssetIMG+'" alt="logo-buku" /><!-- Product details--><div class="card-body p-4"><div class="text-center"><!-- Product name--><h5 class="fw-bolder">'+dataFilterBuku[i].judul_buku+'</h5><!-- Product price-->'+dataFilterBuku[i].kategori_buku+' - '+dataFilterBuku[i].tahun_buku+'</div></div><!-- Product actions--><div class="card-footer p-4 pt-0 border-top-0 bg-transparent"><div class="text-center"><button type="button" class="btn btn-outline-primary">Detail</button> <button type="button" class="btn btn-outline-secondary" onclick="changeStatusBuku(\'' + dataFilterBuku[i].judul_buku + '\',\'' + '1' + '\')">Baca Buku</button> <button type="button" class="btn btn-outline-danger" onclick="removeListBuku(\'' + dataFilterBuku[i].judul_buku + '\')"><i class="bi-x-octagon-fill"></i></button></div></div></div></div>';
+            div.innerHTML = '<div class="col-6 col-md-3 mb-2"><div class="card h-100"><!-- Product image--><img class="card-img-top" src="'+tmpAssetIMG+'" alt="logo-buku" /><!-- Product details--><div class="card-body p-4"><div class="text-center"><!-- Product name--><h5 class="fw-bolder">'+dataFilterBuku[i].judul_buku+'</h5><!-- Product price-->'+dataFilterBuku[i].kategori_buku+' - '+dataFilterBuku[i].tahun_buku+'</div></div><!-- Product actions--><div class="card-footer p-4 pt-0 border-top-0 bg-transparent"><div class="text-center"><button type="button" class="btn btn-outline-primary" onclick="detailBuku(\'' + dataFilterBuku[i].judul_buku + '\')">Detail</button> <button type="button" class="btn btn-outline-secondary" onclick="changeStatusBuku(\'' + dataFilterBuku[i].judul_buku + '\',\'' + '1' + '\')">Baca Buku</button> <button type="button" class="btn btn-outline-danger" onclick="removeListBuku(\'' + dataFilterBuku[i].judul_buku + '\')"><i class="bi-x-octagon-fill"></i></button></div></div></div></div>';
 
             document.getElementById('dataListBuku').appendChild(div.children[0]);
         }        
@@ -59,7 +66,7 @@ function listBuku()
 
 function listBukuSedangDibaca()
 {
-    var dataFilterBuku = databuku;
+    var dataFilterBuku = storageDataBuku;
 
     dataFilterBuku = dataFilterBuku.filter(function(itm){
         return itm.status_buku == '1';
@@ -82,7 +89,7 @@ function listBukuSedangDibaca()
 
 function listBukuSelesaiDibaca()
 {
-    var dataFilterBuku = databuku;
+    var dataFilterBuku = storageDataBuku;
 
     dataFilterBuku = dataFilterBuku.filter(function(itm){
         return itm.status_buku == '2';
@@ -102,17 +109,19 @@ function listBukuSelesaiDibaca()
 }
 
 function changeStatusBuku (judul_buku, status) {
-    for (var i in databuku) {
-      if (databuku[i].judul_buku == judul_buku) {
-        databuku[i].status_buku = status;
+    for (var i in storageDataBuku) {
+      if (storageDataBuku[i].judul_buku == judul_buku) {
+        storageDataBuku[i].status_buku = status;
          break; //Stop this loop, we found it!
       }
     }
+    updateLocalStorage();
     loadDataHTML();
 }
 
 function removeListBuku (judul_buku) {
-    databuku.splice(databuku.findIndex(item => item.judul_buku == judul_buku), 1);
+    storageDataBuku.splice(storageDataBuku.findIndex(item => item.judul_buku == judul_buku), 1);
+    updateLocalStorage();
     loadDataHTML();
 }
 
@@ -163,9 +172,11 @@ function submitTambahData()
         'status_buku':'0'
     }
 
-    databuku.push(tmpDataBuku);
+    storageDataBuku.push(tmpDataBuku);
     resetTamabahData();
-    listBuku();
+
+    updateLocalStorage();
+    loadDataHTML();
 
     var myModalEl = document.getElementById('exampleModal');
     var modal = bootstrap.Modal.getInstance(myModalEl)
@@ -179,6 +190,27 @@ function resetTamabahData()
     document.getElementById('form_tahunBuku').value='-';
     document.getElementById('form_kategoriBuku').value='-';
     document.getElementById('form_deskripsiBuku').value='';
+}
+
+function detailBuku(judul_buku)
+{
+    var detailBuku = null;
+    for (var i=0; i < storageDataBuku.length; i++) {
+        if (storageDataBuku[i].judul_buku == judul_buku) {
+            detailBuku = storageDataBuku[i];
+        }
+    }
+
+    var tmpAssetIMG = assetImageBuku(detailBuku.kategori_buku);
+    document.getElementById("modalDetailIMG").src = tmpAssetIMG;
+
+    document.getElementById('modalDetailJudul').innerHTML = detailBuku.judul_buku;
+    document.getElementById('modalDetailKagori').innerHTML = detailBuku.kategori_buku;
+    document.getElementById('modalDetailDeskripsi').innerHTML = detailBuku.deskripsi_buku;
+    document.getElementById('modalDetailAuthor').innerHTML = detailBuku.pengarang_buku+' - '+detailBuku.tahun_buku;
+
+    var myModal = new bootstrap.Modal(document.getElementById("modalDetailBuku"), {});
+    myModal.show();
 }
 
 function assetImageBuku(kategoriBuku)
