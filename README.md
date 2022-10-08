@@ -20,4 +20,4 @@ Submission Aplikasi Pengelolaan Data Menggunakan DOM dan Web Storage
 - Memiliki Count Jumlah Buku Yang Sedang Dibaca
 
 ## Demo Aplikasi :
-### [Projecy Self Reminder Belajar Membuat Front-End Web untuk Pemula](dicoding-frontend-pemula.sanggatika.com)
+### [Projecy Self Reminder Belajar Membuat Front-End Web untuk Pemula](https://dicoding-frontend-pemula.sanggatika.com/)
