@@ -3,6 +3,7 @@
 
 // get data dari local storage
 var storageDataBuku = JSON.parse(localStorage.getItem(storageKey));
+
 // console.log(storageDataBuku);
 function updateLocalStorage() {
     localStorage.setItem(storageKey, JSON.stringify(storageDataBuku));
@@ -81,7 +82,7 @@ function listBukuSedangDibaca()
     for (let i = 0; i < dataFilterBuku.length; i++) {
         var tmpAssetIMG = assetImageBuku(dataFilterBuku[i].kategori_buku);
 
-        div.innerHTML = '<div class="col-12 col-md-6 mb-2"><div class="card h-100"><!-- Product image--><img class="card-img-top" src="'+tmpAssetIMG+'" alt="logo-buku" /><!-- Product details--><div class="card-body p-4"><div class="text-center"><!-- Product name--><h5 class="fw-bolder">'+dataFilterBuku[i].judul_buku+'</h5><!-- Product price-->'+dataFilterBuku[i].kategori_buku+' - '+dataFilterBuku[i].tahun_buku+'</div></div><!-- Product actions--><div class="card-footer p-4 pt-0 border-top-0 bg-transparent"><div class="text-center"><button type="button" class="btn btn-outline-primary">Detail</button> <button type="button" class="btn btn-outline-secondary" onclick="changeStatusBuku(\'' + dataFilterBuku[i].judul_buku + '\',\'' + '2' + '\')">Selesai Baca</button></div></div></div></div>';
+        div.innerHTML = '<div class="col-12 col-md-6 mb-2"><div class="card h-100"><!-- Product image--><img class="card-img-top" src="'+tmpAssetIMG+'" alt="logo-buku" /><!-- Product details--><div class="card-body p-4"><div class="text-center"><!-- Product name--><h5 class="fw-bolder">'+dataFilterBuku[i].judul_buku+'</h5><!-- Product price-->'+dataFilterBuku[i].kategori_buku+' - '+dataFilterBuku[i].tahun_buku+'</div></div><!-- Product actions--><div class="card-footer p-4 pt-0 border-top-0 bg-transparent"><div class="text-center"><button type="button" class="btn btn-outline-primary" onclick="detailBuku(\'' + dataFilterBuku[i].judul_buku + '\')">Detail</button> <button type="button" class="btn btn-outline-secondary" onclick="changeStatusBuku(\'' + dataFilterBuku[i].judul_buku + '\',\'' + '2' + '\')">Selesai Baca</button></div></div></div></div>';
 
         document.getElementById('dataListBukuSedangDibaca').appendChild(div.children[0]);      
     }
@@ -102,27 +103,74 @@ function listBukuSelesaiDibaca()
     for (let i = 0; i < dataFilterBuku.length; i++) {
         var tmpAssetIMG = assetImageBuku(dataFilterBuku[i].kategori_buku);
 
-        div.innerHTML = '<div class="col-12 col-md-6 mb-2"><div class="card h-100"><!-- Product image--><img class="card-img-top" src="'+tmpAssetIMG+'" alt="logo-buku" /><!-- Product details--><div class="card-body p-4"><div class="text-center"><!-- Product name--><h5 class="fw-bolder">'+dataFilterBuku[i].judul_buku+'</h5><!-- Product price-->'+dataFilterBuku[i].kategori_buku+' - '+dataFilterBuku[i].tahun_buku+'</div></div><!-- Product actions--><div class="card-footer p-4 pt-0 border-top-0 bg-transparent"><div class="text-center"><button type="button" class="btn btn-outline-primary">Detail</button> <button type="button" class="btn btn-outline-secondary" onclick="changeStatusBuku(\'' + dataFilterBuku[i].judul_buku + '\',\'' + '0' + '\')">Kembalikan</button></div></div></div></div>';
+        div.innerHTML = '<div class="col-12 col-md-6 mb-2"><div class="card h-100"><!-- Product image--><img class="card-img-top" src="'+tmpAssetIMG+'" alt="logo-buku" /><!-- Product details--><div class="card-body p-4"><div class="text-center"><!-- Product name--><h5 class="fw-bolder">'+dataFilterBuku[i].judul_buku+'</h5><!-- Product price-->'+dataFilterBuku[i].kategori_buku+' - '+dataFilterBuku[i].tahun_buku+'</div></div><!-- Product actions--><div class="card-footer p-4 pt-0 border-top-0 bg-transparent"><div class="text-center"><button type="button" class="btn btn-outline-primary" onclick="detailBuku(\'' + dataFilterBuku[i].judul_buku + '\')">Detail</button> <button type="button" class="btn btn-outline-secondary" onclick="changeStatusBuku(\'' + dataFilterBuku[i].judul_buku + '\',\'' + '0' + '\')">Kembalikan</button></div></div></div></div>';
 
         document.getElementById('dataListBukuSelesaiDibaca').appendChild(div.children[0]);      
     }
 }
 
 function changeStatusBuku (judul_buku, status) {
-    for (var i in storageDataBuku) {
-      if (storageDataBuku[i].judul_buku == judul_buku) {
-        storageDataBuku[i].status_buku = status;
-         break; //Stop this loop, we found it!
-      }
+    
+    var titleText = null;
+    var btnText = null;
+    if(status == 1)
+    {
+        titleText = 'Apakah Anda Akan Menlist Buku Yang Akan Dibaca ?';
+        btnText = 'Baca Buku';
     }
-    updateLocalStorage();
-    loadDataHTML();
+
+    if(status == 2)
+    {
+        titleText = 'Apakah Anda Akan Menyimpan Buku Telah Selesai Dibaca ?';
+        btnText = 'Selesai Baca Buku';
+    }
+
+    if(status == 0)
+    {
+        titleText = 'Apakah Anda Akan Mengembalikan Buku ?';
+        btnText = 'Kembalikan Buku';
+    }
+
+    Swal.fire({
+        title: titleText,
+        icon: 'info',
+        showDenyButton: false,
+        showCancelButton: true,
+        confirmButtonText: btnText,
+        denyButtonText: `Don't save`,
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            for (var i in storageDataBuku) {
+                if (storageDataBuku[i].judul_buku == judul_buku) {
+                    storageDataBuku[i].status_buku = status;
+                    break; //Stop this loop, we found it!
+                }
+            }
+            updateLocalStorage();
+            loadDataHTML();
+            Swal.fire('Saved!', '', 'success')
+        }
+    })    
 }
 
 function removeListBuku (judul_buku) {
-    storageDataBuku.splice(storageDataBuku.findIndex(item => item.judul_buku == judul_buku), 1);
-    updateLocalStorage();
-    loadDataHTML();
+    Swal.fire({
+        title: "Apa anda akan mengahapus buku "+judul_buku,
+        icon: 'info',
+        showDenyButton: false,
+        showCancelButton: true,
+        confirmButtonText: 'Hapus Buku',
+        denyButtonText: `Don't save`,
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            storageDataBuku.splice(storageDataBuku.findIndex(item => item.judul_buku == judul_buku), 1);
+            updateLocalStorage();
+            loadDataHTML();
+            Swal.fire('Saved!', '', 'success')
+        }
+    }) 
 }
 
 function submitTambahData()
@@ -135,31 +183,51 @@ function submitTambahData()
 
     if(form_JudulBuku == '')
     {
-        alert('Judul Buku Tidak Boleh Kosong.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Informasi !',
+            text: 'Pastikan Judul Buku Diisi, Sesuai dengan buku.',
+        })
         return false;
     }
 
     if(form_pengarangBuku == '')
     {
-        alert('Pengarang Buku Tidak Boleh Kosong.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Informasi !',
+            text: 'Pengarang Buku Tidak Boleh Kosong.',
+        })
         return false;
     }
 
     if(form_tahunBuku == '-')
     {
-        alert('Tahun Buku Belum Anda Pilih.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Informasi !',
+            text: 'Tahun Buku Belum Anda Pilih.',
+        })
         return false;
     }
 
     if(form_kategoriBuku == '-')
     {
-        alert('Kategori Buku Belum Anda Pilih.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Informasi !',
+            text: 'Kategori Buku Belum Anda Pilih.',
+        })
         return false;
     }
 
     if(form_deskripsiBuku == '')
     {
-        alert('Deskripsi Buku Tidak Boleh Kosong.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Informasi !',
+            text: 'Deskripsi Buku Tidak Boleh Kosong.',
+        })
         return false;
     }
 

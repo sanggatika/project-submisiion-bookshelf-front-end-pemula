@@ -61,9 +61,23 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5">
                 <div class="row mb-2">
+                    <div class="col-md-12">
+                        <div class="alert alert-info" role="alert">
+                            <h4 class="alert-heading">Informasi Bookshelf Apps !</h4>
+                            <ol>
+                                <li>Pada Navbar Terdapata Fitur Jumlah Buku Yang Sedang Dibaca.</li>
+                                <li>Fitur Pencarian Judul Buku dan Filter Data hanya aktif pada Data List Buku</li>
+                                <li>Fitur Tambah Data Buku dengan SweetAlert2</li>
+                                <li>Fitur Reset Storage mengembalikan data seperti awal</li>
+                                <li>Data List Buku, Detail Data Buku, Hapus Data Buku, Baca Buku, Selesai Baca Buku, Simpan Kembali List Data Buku</li>
+                            </ol>
+                            <hr>
+                        </div>
+                    </div>
+
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Filter Judul Buku</label>
+                            <label for="exampleFormControlInput1">Pencarian Judul Buku</label>
                             <input type="text" class="form-control" id="filterJudul" onkeyup="listBuku()" placeholder="Filter Judul Buku">
                         </div>
                     </div>
@@ -280,6 +294,7 @@
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- Core theme JS-->
         <script src="js/listdata_buku.js"></script>
         <script src="js/scripts.js"></script>
