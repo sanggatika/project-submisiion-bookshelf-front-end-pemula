@@ -232,6 +232,7 @@ function submitTambahData()
     }
 
     var tmpDataBuku = {
+        'id':+new Date(),
         'judul_buku':form_JudulBuku,
         'pengarang_buku':form_pengarangBuku,
         'tahun_buku':form_tahunBuku,

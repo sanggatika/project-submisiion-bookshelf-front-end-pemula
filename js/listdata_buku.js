@@ -2,6 +2,7 @@ var databuku = []
 
 databuku = [
     {
+        'id' : 3657848524,
         'judul_buku':'Front-End Web Developer',
         'pengarang_buku':'Dicoding',
         'tahun_buku':'2022',
@@ -10,6 +11,7 @@ databuku = [
         'status_buku':'0'
     },
     {
+        'id' : 3657848535,
         'judul_buku':'Android Developer',
         'pengarang_buku':'Dicoding',
         'tahun_buku':'2020',
@@ -18,6 +20,7 @@ databuku = [
         'status_buku':'0'
     },
     {
+        'id' : 3657848546,
         'judul_buku':'iOS Developer',
         'pengarang_buku':'Dicoding',
         'tahun_buku':'2021',
@@ -26,6 +29,7 @@ databuku = [
         'status_buku':'0'
     },
     {
+        'id' : 3657848557,
         'judul_buku':'Multi-Platform App Developer',
         'pengarang_buku':'Dicoding',
         'tahun_buku':'2021',
